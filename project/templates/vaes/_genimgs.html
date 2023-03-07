@@ -1,0 +1,151 @@
+<!-- generated images for each label -->
+<div class="bg-eee">
+    <div class="col-10 offset-1">
+        <h2 class="text-center p-3 mb-2">3. generated images for each model</h2>
+    </div>
+</div>
+
+
+<!-- select nets and label -->
+<div class="bg-white">
+    <div class="col-10 offset-1">
+        <h4 class="text-start p-3 mb-2">select nets and label</h4>
+    </div>
+</div>
+
+<div class="bg-white">
+    <div class="col-10 offset-1">
+        <!--form-->
+        <form method="get" action="{% url 'vaes:compare_images' %}">
+        <div class="row justify-content-center p-3 mb-2">
+            <div class="col-10">
+                <table class="table table-striped table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>net_a</td>
+                            <td>net_b</td>
+                            <td>net_c</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>n_z</td>
+                            <td><select class="form-control" id="select_n_z_a" name="n_z_a">
+                                {% for option_z in option_z_ary %}
+                                <option>{{ option_z }}</option>
+                                {% endfor %}
+                            </select></td>
+                            <td><select class="form-control" id="select_n_z_b" name="n_z_b">
+                                {% for option_z in option_z_ary %}
+                                <option>{{ option_z }}</option>
+                                {% endfor %}
+                            </select></td>
+                            <td><select class="form-control" id="select_n_z_c" name="n_z_c">
+                                {% for option_z in option_z_ary %}
+                                <option>{{ option_z }}</option>
+                                {% endfor %}
+                            </select></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>n_layer</td>
+                            <td><select class="form-control" id="select_n_layer_a" name="n_layer_a">
+                                {% for option_layer in option_layer_ary %}
+                                <option>{{ option_layer }}</option>
+                                {% endfor %}
+                            </select></td>
+                            <td><select class="form-control" id="select_n_layer_b" name="n_layer_b">
+                                {% for option_layer in option_layer_ary %}
+                                <option>{{ option_layer }}</option>
+                                {% endfor %}
+                            </select></td>
+                            <td><select class="form-control" id="select_n_layer_c" name="n_layer_c">
+                                {% for option_layer in option_layer_ary %}
+                                <option>{{ option_layer }}</option>
+                                {% endfor %}
+                            </select></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>n_count</td>
+                            <td><select class="form-control" id="select_n_count_a" name="n_count_a">
+                                {% for option_count in option_count_ary %}
+                                <option>{{ option_count }}</option>
+                                {% endfor %}
+                            </select></td>
+                            <td><select class="form-control" id="select_n_count_b" name="n_count_b">
+                                {% for option_count in option_count_ary %}
+                                <option>{{ option_count }}</option>
+                                {% endfor %}
+                            </select></td>
+                            <td><select class="form-control" id="select_n_count_c" name="n_count_c">
+                                {% for option_count in option_count_ary %}
+                                <option>{{ option_count }}</option>
+                                {% endfor %}
+                            </select></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-2 align-self-center">
+                <label for="select_layer">label_n: </label>
+                <select class="form-control" id="select_label_n" name="label_n">
+                    {% for option_label in option_label_ary %}
+                    <option>{{ option_label }}</option>
+                    {% endfor %}
+                </select><br>
+                <input class="btn btn-secondary" type="submit" value="search">
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+<!-- search result -->
+<div class="bg-light">
+    <div class="col-10 offset-1">
+        <h4 class="text-start p-3 mb-2">search result</h4>
+    </div>
+</div>
+
+
+<div class="bg-light">
+    <div class="col-10 offset-1">
+        <div class="row justify-content-center p-3 mb-2">
+            <div class="col-12 col-md-4">
+                <div class="">
+                    <img src={{ genimg_a }} class="px-3 w-100"></img><br>
+                    <div class="bg-light border border-secondary rounded p-3 mb-2">
+                        <h5>net_a: </h5>
+                        <p>(n_z, n_layer, n_count)</p>
+                        <p> = ({{ net_info_a.0 }}, {{ net_info_a.1 }}, {{ net_info_a.2 }})</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="">
+                    <img src={{ genimg_b }} class="px-3 w-100"></img><br>
+                    <div class="bg-light border border-secondary rounded p-3 mb-2">
+                        <h5>net_b: </h5>
+                        <p>(n_z, n_layer, n_count)</p>
+                        <p> = ({{ net_info_b.0 }}, {{ net_info_b.1 }}, {{ net_info_b.2 }})</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="">
+                    <img src={{ genimg_c }} class="px-3 w-100"></img><br>
+                    <div class="bg-light border border-secondary rounded p-3 mb-2">
+                        <h5>net_c: </h5>
+                        <p>(n_z, n_layer, n_count)</p>
+                        <p> = ({{ net_info_c.0 }}, {{ net_info_c.1 }}, {{ net_info_c.2 }})</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4 class="text-center p-3 mb-2">generated images in label_{{ label_n }}</h4>
+</div>

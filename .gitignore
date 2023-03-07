@@ -1,0 +1,7 @@
+./project/.env
+./project/accounts/__pycache__/
+./project/application/__pycache__/
+./project/application/migrations/__pycache__/
+./project/tests/__pycache__/
+./project/project/__pycache__/
+./matome/train_data/

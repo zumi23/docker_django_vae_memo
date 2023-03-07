@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}Compare Images | VAE Memo{% endblock %}
+
+{% block header%}
+<header class="text-center mb-2 bg-eee">
+    <div class="col-10 offset-1 pt-2">
+      <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb fs-6">
+          <li class="breadcrumb-item"><a href="{% url 'vaes:index' %}" style="text-decoration: none;">Home</a></li>
+          <li class="breadcrumb-item">Nets List</li>
+          <!-- <li class="breadcrumb-item"><a href="#">Model index</a></li> -->
+        </ol>
+      </nav>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="bg-white">
+    <div class="col-10 offset-1">
+        <h1 class="text-center p-3 mb-2">Nets List</h1>
+    </div>
+</div>
+
+<!-- select nets and label -->
+<div class="bg-light">
+    <div class="col-10 offset-1">
+        <h4 class="text-start p-3 mb-2">select search options</h4>
+    </div>
+</div>
+
+<div class="bg-light">
+    <div class="col-10 offset-1">
+        <!--form-->
+        <form method="get" action="{% url 'vaes:nets_list' %}">
+        <div class="row justify-content-center p-3 mb-2">
+            <div class="col-2">
+                <label for="select_z">n_z: </label>
+                <select class="form-control" id="select_z" name="tmp_z">
+                    {% for option_z in option_z_ary %}
+                    <option>{{ option_z }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-2">
+                <label for="select_layer">n_layer: </label>
+                <select class="form-control" id="select_layer" name="tmp_layer">
+                    {% for option_layer in option_layer_ary %}
+                    <option>{{ option_layer }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-3">
+                <label for="order_col">order_col: </label>
+                <select class="form-control" id="order_col" name="tmp_order_col">
+                    {% for option_order_col in option_order_col_ary %}
+                    <option>{{ option_order_col }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-3">
+                <label for="">order_method: </label><br>
+                    <input type="radio" name="tmp_order_method" value="1" {% if ascending %}checked{% endif %}>ascending<br>
+                    <input type="radio" name="tmp_order_method" value="2" {% if descending %}checked{% endif %}>descending<br>
+            </div>
+            <div class="col-2">
+                <label for=""></label>
+                <p><input type="submit" value="search"></p>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+<!-- search result -->
+<div class="bg-white">
+    <div class="col-10 offset-1">
+        <h4 class="text-start p-3 mb-2">search result</h4>
+    </div>
+</div>
+
+<div class="bg-white">
+    <div class="col-10 offset-1">
+        <div class="bg-light border border-secondary rounded p-3 mb-2">
+            <div class="p-2 mb-1">
+                <h5>selected model: (n_z, n_layer) = ({{ tmp_z }}, {{ tmp_layer }})</h5>
+                <h5>order by: {{ tmp_order_col }}</h5>
+                <h5>order method: {{ tmp_order_method_name }}</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- model info -->
+<div class="bg-light">
+    <div class="col-10 offset-1">
+        <h4 class="text-start p-3 mb-2">model info</h4>
+    </div>
+</div>
+
+<div class="bg-light">
+    <div class="col-10 offset-1">
+        <table class="table table-striped table-bordered text-end">
+            <thead>
+                <tr>
+                    <td>id_net</td>
+                    <td>n_z</td>
+                    <td>n_layer</td>
+                    <td>n_count</td>
+                    <td>rep</td>
+                    <td>dr</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for net in object_list %}
+                <tr>
+                    <td><a href="{% url 'vaes:net_detail' pk=net.id %}">{{ net.id_net }}</a></td>
+                    <td>{{ net.n_z }}</td>
+                    <td>{{ net.n_layer }}</td>
+                    <td>{{ net.n_count }}</td>
+                    <td>{{ net.rep }}</td>
+                    <td>{{ net.dr }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

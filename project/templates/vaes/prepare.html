@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header%}
+<header class="text-center mb-2 bg-eee">
+    <div class="col-10 offset-1 pt-2">
+      <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb fs-6">
+          <li class="breadcrumb-item"><a href="{% url 'vaes:index' %}" style="text-decoration: none;">Home</a></li>
+          <li class="breadcrumb-item">In Preraration</li>
+          <!-- <li class="breadcrumb-item"><a href="#">Model index</a></li> -->
+        </ol>
+      </nav>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+
+<div class="bg-info">
+    <div class="col-10 offset-1">
+        <h2 class="text-center p-3 mb-2">In preparation</h2>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:14.5
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - 45432:5432
+    environment:
+      - POSTGRES_NAME=project
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    image: zumi23/django_custom_image:1.2
+    command: >
+        bash -c "python manage.py makemigrations
+        && python manage.py migrate
+        && python seeds.py
+        && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./project:/project
+    ports:
+      - "48000:8000"
+    environment:
+      - POSTGRES_NAME=project
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db
+
+  

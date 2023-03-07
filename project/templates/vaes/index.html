@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home | VAE Memo{% endblock %}
+
+{% block header%}
+<header class="text-center mb-2 bg-eee">
+    <div class="col-10 offset-1 pt-2">
+      <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb fs-6">
+          <li class="breadcrumb-item"><a href="{% url "vaes:index" %}" style="text-decoration: none;">Home</a></li>
+          {% comment %} <li class="breadcrumb-item"><a href="#" style="text-decoration: none;">Model index</a></li> {% endcomment %}
+        </ol>
+      </nav>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="text-center mb-2 bg-white">
+    <div class="container d-none d-md-block">
+        <div id="carouselExampleCaptions" class="carousel carousel-dark slide  align-self-center" data-bs-ride="false">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner"  style="height: 400px;">
+                <div class="carousel-item active">
+                    <img src="{% static 'img/generate_model.png' %}" class="d-block mx-auto mw-100" alt="...">
+                    {% comment %} <div class="carousel-caption d-none d-md-block text-primary">
+                        <h5>First slide label</h5>
+                        <p>Some representative placeholder content for the first slide.</p>
+                    </div> {% endcomment %}
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'img/classify_model.png' %}" class="d-block mx-auto" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'img/convolutional_layer.png' %}" class="d-block mx-auto" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- generated images for each label -->
+<div class="bg-eee">
+    <div class="col-10 offset-1">
+        <h2 class="text-center p-3 mb-2">Contents</h2>
+    </div>
+</div>
+
+
+<!-- select nets and label -->
+<div class="bg-white">
+    <div class="col-10 offset-1">
+        <div class="row justify-content-start p-3 mb-2">
+            {% for object_i in object_list %}
+            <div class="col-6 col-md-4">
+                <div class="card text-center p-3 mb-2">
+                    <img src={{ object_i.img_path }} class="card-img-top">
+                    <div class="card-body">
+                        <h6 class="card-title">{{ object_i.title }}</h6>
+                        <a href={{object_i.action_url}} class="btn btn-secondary">Show detail</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% comment %} <!-- pagination -->
+            <div class="pagination justify-content-center">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+            
+                    {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div> {% endcomment %}
+
+            <!-- pagination -->
+            <div class="pagination justify-content-center">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                    <a class="btn btn-outline-secondary" href="?page=1">&laquo; first</a> |
+                    <a class="btn btn-outline-secondary" href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        <a class="btn btn-secondary" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
+                    </span>
+            
+                    {% if page_obj.has_next %}
+                    <a class="btn btn-outline-secondary" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a> |
+                    <a class="btn btn-outline-secondary" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
