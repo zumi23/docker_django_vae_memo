@@ -98,7 +98,6 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # カスタムユーザモデルをユーザモデルに指定
 AUTH_USER_MODEL = 'accounts.Users'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
