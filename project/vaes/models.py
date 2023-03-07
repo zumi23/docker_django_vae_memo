@@ -8,16 +8,15 @@ import logging
 # application_logger = logging.getLogger('application-logger')
 
 
-class BaseModel(models.Model):
-    create_at = models.DateTimeField()
-    update_at = models.DateTimeField()
+# class BaseModel(models.Model):
+#     create_at = models.DateTimeField(null=True)
+#     update_at = models.DateTimeField(null=True)
 
-    class Meta:
-        abstract = True # 抽象モデルとして定義＞このクラスを基にモデルを作成
+#     class Meta:
+#         abstract = True # 抽象モデルとして定義＞このクラスを基にモデルを作成
 
 
 class Nets(models.Model):
-    # name = models.CharField(max_length=255)
     n_z = models.IntegerField()
     n_layer = models.IntegerField()
     n_count = models.IntegerField()
