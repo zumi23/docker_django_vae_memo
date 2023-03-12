@@ -54,6 +54,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'vaes:compare_images' %}">Compare Images</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'vaes:effects_on_genimgs' %}">Effects on Generated Images</a>
+                                </li>
                             </ul>
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item">
@@ -75,12 +78,13 @@
             <!-- Footer -->
             <footer class="py-4 bg-dark">
                 <div class="container">
-                    <p class="m-0 text-center text-white small">&copy; 2022-2023 <a href="####" style="text-decoration: none;">zumi23</a></p>
+                    <p class="m-0 text-center text-white small">&copy; 2022-2023 <a href="https://github.com/zumi23" style="text-decoration: none;">zumi23</a></p>
                 </div>
                 <!-- /.container -->
             </footer>
-
+            <!-- Bootstrap core JavaScript -->
+            <script src="{% static 'vendor/jquery/jquery-3.6.1.slim.min.js' %}"></script>
+            <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
         </div>
     </body>
-
 </html>

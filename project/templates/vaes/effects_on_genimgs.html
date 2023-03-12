@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Effects on Generated Images | VAE Memo{% endblock %}
+
+{% block header%}
+<header class="text-center mb-2 bg-eee">
+    <div class="col-10 offset-1 pt-2">
+      <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb fs-6">
+          <li class="breadcrumb-item"><a href="{% url 'vaes:index' %}" style="text-decoration: none;">Home</a></li>
+          <li class="breadcrumb-item">Effects on Generated Images</li>
+        </ol>
+      </nav>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="bg-white">
+    <div class="col-10 offset-1">
+        <h1 class="text-center p-3 mb-2">Effects on Generated Images</h1>
+    </div>
+</div>
+
+<div class="bg-light">
+    <div class="col-10 offset-1">
+        <ul class="nav nav-pills my-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="pills-content-1-tab" data-bs-toggle="pill" data-bs-target="#pills-content-1" type="button" role="tab" aria-controls="pills-content-1" aria-selected="true">result_1</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="pills-content-2-tab" data-bs-toggle="pill" data-bs-target="#pills-content-2" type="button" role="tab" aria-controls="pills-content-2" aria-selected="false">result_2</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="pills-content-3-tab" data-bs-toggle="pill" data-bs-target="#pills-content-3" type="button" role="tab" aria-controls="pills-content-3" aria-selected="false">result_3</button>
+            </li>
+          </ul>
+    </div>
+</div>
+
+
+<div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-content-1" role="tabpanel" aria-labelledby="pills-content-1-tab" tabindex="0">
+        <!-- #1 Effects of rep on generated images -->
+        <div class="bg-eee">
+            <div class="col-10 offset-1">
+                <h2 class="text-center p-3 mb-2">Effects of rep on generated images</h2>
+            </div>
+        </div>
+        {% include "vaes/include_effects_on_genimgs/_11.html" %}
+        {% include "vaes/include_effects_on_genimgs/_12.html" %}
+    </div>
+    <div class="tab-pane fade" id="pills-content-2" role="tabpanel" aria-labelledby="pills-content-2-tab" tabindex="0">
+        <!-- #2 Effects of dr on generated images -->
+        <div class="bg-eee">
+            <div class="col-10 offset-1">
+                <h2 class="text-center p-3 mb-2">Effects of dr on generated images</h2>
+            </div>
+        </div>
+        {% include "vaes/include_effects_on_genimgs/_21.html" %}
+        {% include "vaes/include_effects_on_genimgs/_22.html" %}
+    </div>
+    <div class="tab-pane fade" id="pills-content-3" role="tabpanel" aria-labelledby="pills-content-3-tab" tabindex="0">
+        <!-- #3 Relationship between dr and rep -->
+        <div class="bg-eee">
+            <div class="col-10 offset-1">
+                <h2 class="text-center p-3 mb-2">Relationship between dr and rep</h2>
+            </div>
+        </div>
+        {% include "vaes/include_effects_on_genimgs/_31.html" %}
+        {% include "vaes/include_effects_on_genimgs/_32.html" %}
+        {% include "vaes/include_effects_on_genimgs/_33.html" %}
+        {% include "vaes/include_effects_on_genimgs/_34.html" %}
+    </div>
+</div>
+
+{% endblock %}
