@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Compare Images | Sample App{% endblock %}
+{% block title %}Compare Images | VAE Memo{% endblock %}
 
 {% block header%}
 <header class="text-center mb-2 bg-eee">
@@ -25,7 +25,7 @@
 <!-- generated images for each label -->
 <div class="bg-eee">
     <div class="col-10 offset-1">
-        <h2 class="text-center p-3 mb-2">1. generated images for each model</h2>
+        <h2 class="text-center p-3 mb-2">1. Generated images for each model</h2>
     </div>
 </div>
 
@@ -142,7 +142,7 @@
             <div class="col-12 col-md-4">
                 <div class="">
                     <img src={{ genimg_a }} class="px-3 w-100"></img><br>
-                    <div class="bg-light border border-secondary rounded p-3 mb-2">
+                    <div class="bg-light border border-eee rounded p-3 mb-2">
                         <h5>net_a: </h5>
                         <p>(n_z, n_layer, n_count)</p>
                         <p> = ({{ net_info_a.0 }}, {{ net_info_a.1 }}, {{ net_info_a.2 }})</p>
@@ -152,7 +152,7 @@
             <div class="col-12 col-md-4">
                 <div class="">
                     <img src={{ genimg_b }} class="px-3 w-100"></img><br>
-                    <div class="bg-light border border-secondary rounded p-3 mb-2">
+                    <div class="bg-light border border-eee rounded p-3 mb-2">
                         <h5>net_b: </h5>
                         <p>(n_z, n_layer, n_count)</p>
                         <p> = ({{ net_info_b.0 }}, {{ net_info_b.1 }}, {{ net_info_b.2 }})</p>
@@ -162,7 +162,7 @@
             <div class="col-12 col-md-4">
                 <div class="">
                     <img src={{ genimg_c }} class="px-3 w-100"></img><br>
-                    <div class="bg-light border border-secondary rounded p-3 mb-2">
+                    <div class="bg-light border border-eee rounded p-3 mb-2">
                         <h5>net_c: </h5>
                         <p>(n_z, n_layer, n_count)</p>
                         <p> = ({{ net_info_c.0 }}, {{ net_info_c.1 }}, {{ net_info_c.2 }})</p>
@@ -177,7 +177,7 @@
 <!-- relationship between dr and rep -->
 <div class="bg-eee">
     <div class="col-10 offset-1">
-        <h2 class="text-center p-3 mb-2">2. relationship between dr and rep</h2>
+        <h2 class="text-center p-3 mb-2">2. Relationship between dr and rep</h2>
     </div>
 </div>
 
@@ -272,7 +272,7 @@
     <div class="col-10 offset-1">
         <div class="row justify-content-center p-3 mb-2">
             <div class="col-12 col-md-4">
-                <div class="bg-light border border-secondary rounded p-3 mb-2">
+                <div class="bg-light border border-eee rounded p-3 mb-2">
                     <h5>net_a: </h5>
                     <p>(n_z, n_layer) = ({{ net_info_a.0 }}, {{ net_info_a.1 }})</p>
                 </div>
@@ -296,7 +296,7 @@
                 </table>
             </div>
             <div class="col-12 col-md-4">
-                <div class="bg-light border border-secondary rounded p-3 mb-2">
+                <div class="bg-light border border-eee rounded p-3 mb-2">
                     <h5>net_b: </h5>
                     <p>(n_z, n_layer) = ({{ net_info_b.0 }}, {{ net_info_b.1 }})</p>
                 </div>
@@ -320,7 +320,7 @@
                 </table>
             </div>
             <div class="col-12 col-md-4">
-                <div class="bg-light border border-secondary rounded p-3 mb-2">
+                <div class="bg-light border border-eee rounded p-3 mb-2">
                     <h5>net_c: </h5>
                     <p>(n_z, n_layer) = ({{ net_info_c.0 }}, {{ net_info_c.1 }})</p>
                 </div>

@@ -11,14 +11,11 @@ from django.views.generic.edit import (
 
 from .models import(
     Nets, GenImgs, HomeContents, 
-    # Books, Pictures,
-    # Products, Carts, CartItems, Addresses,
-    # Orders, OrderItems,
 )
     
 # from . import forms
 # from .forms import(
-#     # CartUpdateForm, AddressInputForm,
+#     # XxxxForm, AddressInputForm,
 # )
 
 import os
@@ -243,3 +240,36 @@ class CompareImagesView(ListView):
         
         # qs = qs.order_by('n_count')
         return qs
+
+
+class EffectsOnGenimgsView(TemplateView):
+    template_name = os.path.join('vaes', 'effects_on_genimgs.html')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        model_info_dict = {
+            '11': [[1, 1, 3], [4, 1, 1], [16, 1, 3]],
+            '12': [[4, 1, 1], [4, 3, 3], [4, 7, 5]],
+            '21': [[1, 7, 3], [4, 7, 3], [16, 7, 4]],
+            '22': [[16, 1, 3], [16, 3, 5], [16, 7, 4]],
+            '31': [[16, 7, 4], [4, 7, 5], [1, 3, 2]],
+            '32': [[16, 1, 2], [8, 1, 1], [4, 1, 4]],
+            '33': [[1, 3, 5], [4, 7, 5], [8, 1, 1]],
+            '34': [[1, 7, 1], [1, 3, 2], [1, 1, 1]],
+        }
+
+        key_ary = ['11', '12', '21', '22', '31', '32', '33', '34']
+        data_dict = {}
+
+        for key_i in key_ary:
+            tmp_data = []
+            tmp_model_info = model_info_dict[key_i]
+            for model_j in tmp_model_info:
+                tmp_obj = Nets.objects.filter(n_z=model_j[0], n_layer=model_j[1], n_count=model_j[2]).first()
+                tmp_img = f'{tmp_obj.genimgs.genimgs_dir}/all.png'
+                tmp_data.append([tmp_obj, tmp_img])
+            data_dict[key_i] = tmp_data
+
+        context['data_dict'] = data_dict
+        return context
