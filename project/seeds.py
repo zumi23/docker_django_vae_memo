@@ -9,6 +9,7 @@ import csv
 from vaes.models import (
     Nets, GenImgs, NetFigs, HomeContents,
 )
+from datetime import datetime
 from django.urls import reverse_lazy
 
 
@@ -56,10 +57,11 @@ with open(file_path, "r") as input_file:
     for row_i in f:
         n = HomeContents.objects.create(
             title = str(row_i[0]),
+            action = str(row_i[1]),
             img_path = img_path_tpl.format(row_i[1]),
             action_url = reverse_lazy(action_url_tpl.format(row_i[1])),
         )
         n.save()
 
-print("completed reading csv")
+print("completed loading csv")
 
