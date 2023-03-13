@@ -39,7 +39,7 @@ class Nets(models.Model):
 
     def __str__(self):
         return f'{self.n_z}, {self.n_layer}, {self.n_count}'
-
+    
     # def get_absolute_url(self):
     #     return reverse_lazy('vaes:detail_net', kwargs={'pk': self.pk}) # 使用例：templateからaタグ内で呼び出し、詳細画面へのリンクとして機能させる
 
@@ -67,6 +67,7 @@ class GenImgs(models.Model):
 
 class HomeContents(models.Model):
     title = models.CharField(max_length=255, null=True)
+    action = models.CharField(max_length=255, null=True)
     img_path = models.CharField(max_length=255, null=True)
     action_url = models.CharField(max_length=255, null=True)
 

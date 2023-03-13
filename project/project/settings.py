@@ -170,3 +170,79 @@ STATICFILES_DIRS = (
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# ロギングの設定
+LOGGING = {
+    'version': 1, # ロガーのバージョン
+    'disable_existing_loggers': False, # デフォルトのログを無効にするかどうか
+
+    # loggerの設定
+    'loggers': {
+        'application-logger': {
+            'handlers': ['console_handler', 'timed_file_handler',],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        # 'error-logger': {
+        #     'handlers': ['console_handler', 'timed_error_handler',],
+        #     'level': 'ERROR',
+        #     'propagate': False,
+        # },
+        # 'performance-logger': {
+        #     'handlers': ['console_handler', 'timed_performance_handler',],
+        #     'level': 'INFO',
+        #     'propagate': False,
+        # },
+    },
+
+    # handlerの設定
+    'handlers': {
+        'console_handler': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'timed_file_handler': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join('logs', 'application.log'),
+            'when': 'S',
+            'interval': 10,
+            'backupCount': 5,
+            'formatter': 'simple',
+            'encoding': 'utf-8',
+            'delay': True, # 書き込み処理が終了するまでローテーションを待つ
+        },
+        # 'timed_error_handler': {
+        #     'level': 'ERROR',
+        #     'class': 'logging.handlers.TimedRotatingFileHandler',
+        #     'filename': os.path.join('logs', 'application_error.log'),
+        #     'when': 'S',
+        #     'interval': 10,
+        #     'backupCount': 10,
+        #     'formatter': 'simple',
+        #     'encoding': 'utf-8',
+        #     'delay': True, # 書き込み処理が終了するまでローテーションを待つ
+        # },
+        # 'timed_performance_handler': {
+        #     'level': 'ERROR',
+        #     'class': 'logging.handlers.TimedRotatingFileHandler',
+        #     'filename': os.path.join('logs', 'application_performance.log'),
+        #     'when': 'S',
+        #     'interval': 10,
+        #     'backupCount': 10,
+        #     'formatter': 'simple',
+        #     'encoding': 'utf-8',
+        #     'delay': True, # 書き込み処理が終了するまでローテーションを待つ
+        # },
+    },
+
+    # formatterの設定
+    'formatters': {
+        'simple': {
+            'format': '%(asctime)s [%(levelname)s] %(message)s',
+
+        },
+    },
+
+}

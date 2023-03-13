@@ -30,7 +30,8 @@ from django.http import JsonResponse, Http404
 from django.core.cache import cache
 from django.db import transaction
 
-# application_logger = logging.getLogger('application-logger') # 引数にはsettings.py内のloggerの設定で定義したロガー名を用いる
+
+application_logger = logging.getLogger('application-logger') # 引数にはsettings.py内のloggerの設定で定義したロガー名を用いる
 # error_logger = logging.getLogger('error-logger')
 
 class IndexView(ListView):
@@ -40,7 +41,7 @@ class IndexView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # # application_logger.debug('Home画面を表示します')
+        # application_logger.debug('Show ' + os.path.join('vaes', 'list_nets.html'))
         # # Http404のログを取得するテスト
         # if kwargs.get('name') == 'aaaa':
         #     # error_logger.error('この名前は使用できません') middleware.py内に記述
@@ -98,6 +99,7 @@ class NetsListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        
         # print(context)
         # context['form'] = forms.BookForm()
         tmp_ary_1 = [2**x for x in range(5)]
@@ -128,6 +130,10 @@ class NetsListView(ListView):
         elif tmp_order_method == '2':
             context['descending'] = True
             context['tmp_order_method_name'] = 'descending'
+
+        log_tpl = '(n_z, n_layer) = ({}, {}), order by: {}, order method: {}'
+        log_message = log_tpl.format(context['tmp_z'], context['tmp_layer'], context['tmp_order_col'], context['tmp_order_method_name'])
+        application_logger.info(log_message)
         return context
 
         # realimg_n = f'/static/img/vaes/real/{tmp_label}.png'
@@ -135,8 +141,6 @@ class NetsListView(ListView):
         # context['realimg_n'] = realimg_n
         # context['genimg_n'] = genimg_n
         # context['test'] = self.object.genimgs.genimgs_dir
-                
-        return context
     
 
 class NetDetailView(DetailView):
